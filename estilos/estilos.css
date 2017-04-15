@@ -1,0 +1,37 @@
+﻿     .carousel-inner .item img {
+            width: auto;
+            margin: auto;
+            height: auto;
+            max-height: 300px;
+        }
+   body {
+   background-image: url(../imagenes/blackjack.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    padding: 15px;
+    background-size: 2000px, 1000px;
+}
+.divimg{
+    width:2000px;
+    align-content:center;
+}
+.imgtop{
+    height:250px;
+    width:1340px;
+    padding: 5px 0 5px;
+}
+.jumbotron{
+    padding:2px;
+    border:2px;
+    } 
+ .menu1{
+    padding:2px;      
+}
+.divvideo{
+     border-color:red;
+     border-radius:10px;
+     align-content:center;
+
+     height:350px; 
+
+}

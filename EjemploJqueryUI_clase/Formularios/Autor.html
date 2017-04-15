@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>Autor</title>
+    <meta charset="utf-8" />
+    <!-- Incluimos el css de jqueryui -->
+    <link href="../JqueryUI/jquery-ui.min.css" rel="stylesheet" /> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " type="text/css" />
+
+ 
+</head>
+<body>
+    <div class="page-header text-center">
+        <font face="impact" size=8 color="red"> <h1>AUTOR</h1> </font>
+    </div>
+
+   
+    <div id="divAccordion">
+        <h3>Autor</h3>
+        <div>Sebastian David Quesada Burgos<br />
+        Correo: tianq28@hotmail.com<br />
+            <img src="" width="300" height="228">
+
+        </div>
+        <h3>Reseña Personal</h3>
+        <div>Hobby: Jugar futbol.<br />
+        Salir con mi amigos y novia.<br />
+        Jugar video juegos.<br />
+        Dormir.<br />
+        Entrenar en el gimnasio.<br />
+        Nivel academico:<br />
+        Bachiller Liceo de Barbacoas.<br />
+        Actualmente estudiante de ingenieria en sistemas.
+        <br />
+        Cursos: entrenamiento contra resistencia modulo (15HORAS IPT).
+        <br />
+            Nutrición  y rendimiento deportivo.  (15HORAS IPT)
+
+            
+        </div>
+            <h3>Tercer Contenido</h3>
+        <div>Este es el tercer contenido del accordion</div>
+    </div>
+  
+
+    <div class="page-header text-center"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+</body>
+    </html>
+ <!-- Incluimos Jquery -->
+<script src="../Scripts/jquery-1.10.2.min.js"></script>
+<!-- Incluimos Jquery UI-->
+<script src="../JqueryUI/jquery-ui.min.js"></script>
+<script src="../Scripts/jquery.validate.js"></script>
+<!-- Incluimos Jquery Validate-->
+<script src="../Scripts/additional-methods.js"></script>
+<!-- Incluimos nuestra librería de funciones generales -->
+<script src="../Scripts/funcionesGeneralesJS.js"></script>
+<script type="text/javascript">
+    $(function () {
+        creaElementosJqueryUI();
+    });
+
+    function creaElementosJqueryUI() {
+        ////crear el acordión
+        $("#divAccordion").accordion();
+
+
+    }
+
+    </script>
