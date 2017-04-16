@@ -5,12 +5,46 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " type="text/css" />   
 </head>
 <body>
+    <div class="jumbotron">
 
-    <button>Apostar</button>
-    <button class="">Retirarse</button>   
-    
-     
+        <div id="mainContent">
+
+
+            <div id="tablero">
+
+                <label id="Cartas Disponibles">Puntuación del Jugador</label>
+                <div class="clearfix"></div>
+                <label id="puntuacionJugador">Puntuación del Jugador</label>
+                <div class="clearfix"></div>
+                <label id="puntuacionCrupier">Puntuación del Crupier</label>
+                <div class="clearfix"></div>
+                <button class="btn" onclick="img_create()" id="botonApostar">Apostar</button>
+                <button class="btn">Retirarse</button>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
-</body>
-</html>
+
+    <script type="text/javascript">
+
+        document.getElementById("botonApostar").onclick =
+        function img_create() {
+          //Aquí iría la parte que me dice la imagen que vamos a tomar, es decir, aquí se ejecuta la selección aleatoria
+          //de la carta, además de la animación
+          var imgCreated = document.createElement("img");
+          imgCreated.src = "../imagenes/10_corazon.GIF";
+          imgCreated.setAttribute("height", "200");
+          imgCreated.setAttribute("width", "100");
+          document.getElementById("tablero").appendChild(imgCreated);
+       }
+    </script>
+</body >
+</html >
+
+   
