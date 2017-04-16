@@ -38,8 +38,8 @@
           //Aquí iría la parte que me dice la imagen que vamos a tomar, es decir, aquí se ejecuta la selección aleatoria
           //de la carta, además de la animación
           var imgCreated = document.createElement("img");
-          imgCreated.src = "../imagenes/10_corazon.GIF";
-          imgCreated.setAttribute("height", "200");
+          imgCreated.src = "../imagenes/10_corazon.GIF"; //La ruta será dinámica cargada desde la DB
+          imgCreated.setAttribute("height", "200"); //Ancho y alto de prueba
           imgCreated.setAttribute("width", "100");
           document.getElementById("tablero").appendChild(imgCreated);
        }
