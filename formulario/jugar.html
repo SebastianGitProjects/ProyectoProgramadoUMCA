@@ -2,29 +2,58 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " type="text/css" />   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " type="text/css" />
+    <link rel="stylesheet" href="../estilos/jugar.css" type="text/css" />
 </head>
 <body>
-    <div class="jumbotron">
 
+
+
+
+    <div class="jumbotron centerElement">
         <div id="mainContent">
-
-
             <div id="tablero">
 
-                <label id="cartasDisponibles">Cartas Disponibles</label>
-                <div class="clearfix"></div>
-                <label id="puntuacionJugador">Puntuación del Jugador</label>
-                <div class="clearfix"></div>
-                <label id="puntuacionCrupier">Puntuación del Crupier</label>
-                <div class="clearfix"></div>
-                <button class="btn" onclick="img_create()" id="botonApostar">Apostar</button>
-                <button class="btn">Retirarse</button>
+                <div class="row centerElement">
+                    <div class="col-md-12">
+                        <label id="cartasDisponibles"><span class="label"> Disponibles: 54</span></label>
+                    </div>
+                </div>
 
+                <div class="row centerElement">
+                    <div class="col-md-12">
+                        <img src="../imagenes/reverso.jpg" height="200" width="130" id="imagenBaraja"/>
+                    </div>
+                </div>      
+                <div class="clearfix"></div><br /><br />
+
+                <div class="row centerElement">
+                    <div class=" col-sm-12 col-md-6">
+                        <label id="puntuacionJugador"><span class="label">Puntuación del Jugador: 0</span></label>
+                    </div>
+                    <div class=" col-sm-12 col-md-6">
+                        <label id="puntuacionCrupier"><span class="label">Puntuación del Crupier: 0</span></label>
+                    </div>
+                </div>
+                <div class="row centerElement">
+                    <div class="col-md-6">
+                        <img src="../imagenes/reverso.jpg" height="200" width="130" />
+                    </div>
+                    <div class="col-md-6">
+                        <img src="../imagenes/reverso.jpg" height="200" width="130" />
+                    </div>
+                </div>
+                <div class="clearfix"></div><br /><br />
+
+                <div class="row centerElement">
+                    <div class=" col-sm-12 col-md-6">
+                        <button class="btn" onclick="apostar()" id="botonApostar">Apostar</button>
+                    </div>
+                    <div class=" col-sm-12 col-md-6">
+                        <button class="btn">Retirarse</button>
+                    </div>
+                </div>
             </div>
-
-
-
         </div>
     </div>
 
@@ -34,15 +63,22 @@
     <script type="text/javascript">
 
         document.getElementById("botonApostar").onclick =
-        function img_create() {
-          //Aquí iría la parte que me dice la imagen que vamos a tomar, es decir, aquí se ejecuta la selección aleatoria
-          //de la carta, además de la animación
-          var imgCreated = document.createElement("img");
-          imgCreated.src = "../imagenes/10_corazon.GIF"; //La ruta será dinámica cargada desde la DB
-          imgCreated.setAttribute("height", "200"); //Ancho y alto de prueba
-          imgCreated.setAttribute("width", "100");
-          document.getElementById("tablero").appendChild(imgCreated);
-       }
+            function apostar() {
+                //Está función es la que lleva la magia jajaja
+                img_create("../imagenes/10_corazon.GIF");
+            }
+
+        function img_create(src) {
+            var creationPosition = document.getElementById("imagenBaraja").getBoundingClientRect();
+            var imgCreated = document.createElement("img");
+            imgCreated.src = src; //La ruta será dinámica cargada desde la DB
+            imgCreated.setAttribute("height", "200");
+            imgCreated.setAttribute("width", "130");
+            imgCreated.setAttribute("class", "cartaSuperpuesta");
+            imgCreated.style.top = creationPosition.top + 'px';
+            imgCreated.style.left = creationPosition.left + 'px';
+            document.getElementById("tablero").appendChild(imgCreated);
+        }
     </script>
 </body >
 </html >
