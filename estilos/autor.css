@@ -1,0 +1,13 @@
+﻿  body{
+    background-image: url(../imagenes/unnamed.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    padding: 10px;
+    background-size: 600px, auto;
+}
+img{
+    border-radius: 25px;
+    border-color : black;
+    
+}
+

@@ -4,53 +4,88 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <title>Autor</title>
+    <link href="../../estilos/autor.css" rel="stylesheet" />
     <meta charset="utf-8" />
     <!-- Incluimos el css de jqueryui -->
-    <link href="../JqueryUI/jquery-ui.min.css" rel="stylesheet" /> 
+    <link href="../JqueryUI/jquery-ui.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " type="text/css" />
 
- 
+
 </head>
 <body>
-    <div class="page-header text-center">
-        <font face="impact" size=8 color="red"> <h1>AUTOR</h1> </font>
-    </div>
-
-   
-    <div id="divAccordion">
-        <h3>Autor</h3>
-        <div>Sebastian David Quesada Burgos<br />
-        Correo: tianq28@hotmail.com<br />
-            <img src="" width="300" height="228">
-
-        </div>
-        <h3>Reseña Personal</h3>
-        <div>Hobby: Jugar futbol.<br />
-        Salir con mi amigos y novia.<br />
-        Jugar video juegos.<br />
-        Dormir.<br />
-        Entrenar en el gimnasio.<br />
-        Nivel academico:<br />
-        Bachiller Liceo de Barbacoas.<br />
-        Actualmente estudiante de ingenieria en sistemas.
+<nav class="navbar navbar-inverse">
+    <ul class="nav navbar-nav"/>
+    </nav>
         <br />
-        Cursos: entrenamiento contra resistencia modulo (15HORAS IPT).
         <br />
-            Nutrición  y rendimiento deportivo.  (15HORAS IPT)
-
-            
+        <br />
+        <div class="page-header text-center">
+            <font face="impact" size=8 color="red"> <h1>AUTOR</h1> </font>
         </div>
+
+
+        <div id="divAccordion">
+            <h3>Autor</h3>
+            <div>
+                Sebastian David Quesada Burgos<br />
+                Correo: tianq28@hotmail.com<br />
+                <img src="../Imagenes/sebas.jpeg" width="320" height="300" class="imgColor">
+
+            </div>
+            <h3>Reseña Personal</h3>
+            <div>
+                Hobby: Jugar futbol.<br />
+                Salir con mi amigos y novia.<br />
+                Jugar video juegos.<br />
+                Dormir.<br />
+                Entrenar en el gimnasio.<br />
+                Nivel academico:<br />
+                Bachiller Liceo de Barbacoas.<br />
+                Actualmente estudiante de ingenieria en sistemas.
+                <br />
+                Cursos: entrenamiento contra resistencia modulo (15HORAS IPT).
+                <br />
+                Nutrición  y rendimiento deportivo.  (15HORAS IPT)
+
+
+            </div>
             <h3>Tercer Contenido</h3>
-        <div>Este es el tercer contenido del accordion</div>
-    </div>
-  
+            <div>Este es el tercer contenido del accordion</div>
 
-    <div class="page-header text-center"/>
+        </div>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol id="olCarousel" class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="../imagenes/black-jack-image.jpg">
+            </div>
+            <div class="item">
+                <img src="../imagenes/Blackjack_board.jpg">
+            </div>
+            <div class="item">
+                <img src="../imagenes/imagen2.jpg">
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
+
+        <div class="page-header text-center" />
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
-</body>
-    </html>
+        </body>
+</html>
  <!-- Incluimos Jquery -->
 <script src="../Scripts/jquery-1.10.2.min.js"></script>
 <!-- Incluimos Jquery UI-->

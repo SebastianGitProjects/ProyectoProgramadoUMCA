@@ -1,0 +1,33 @@
+﻿
+input {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    border-color: #F05F40;
+    border-width: 3px;
+    max-width: 50px
+}
+body {
+    background: url("../imagenes/fondo-verde-217279.jpg");
+    background-size: 1400px 1650px;
+    background-repeat: no-repeat;
+    padding-top: 30px;
+}
+th , h2{
+    color: white;
+}
+form {
+
+    padding: 2px;
+    cursor: pointer;
+    display: block;
+    width: 290px;
+    margin: 0 auto;
+    text-align: left;
+}
+centrar {
+    
+
+}
+
+
