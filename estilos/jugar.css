@@ -5,7 +5,7 @@
 
 .centerElement {
     margin: auto;
-    width: 90%;
+    width: 100%;
     padding: 10px;
     text-align: center;
 }
@@ -14,7 +14,6 @@
 
     background-color: rgba(0,0,0,0.7);
     color: orange;
-    border-radius: 20px;
 
 }
 
