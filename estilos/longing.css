@@ -1,4 +1,68 @@
-﻿form{
-    col-sm-offset-5
+﻿* {
+    margin: 0px;
+    padding: 0px;
+}
 
+body {
+    background-image: url("../imagenes/bgLoginRegister.jpeg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    margin-right: 15px;
+}
+
+#content {
+    margin-top: 5%;
+    color: black;
+    text-align: center;
+}
+
+.jumbotron {
+    background-color: rgba(0,0,0,0.5);
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 8%;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.form-item {
+    margin-right: 0px auto;
+}
+
+form input {
+    text-align: center;
+    color: black;
+    border-radius: 10px;
+}
+
+.main-label {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.btn {
+    background-color: #fff;
+    color: black;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+    footer .center-text {
+        text-align: center;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+.separador {
+    width: 15%;
+    height: 1px;
+    margin: 0 auto;
+    background-color: white;
 }

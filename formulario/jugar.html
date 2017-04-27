@@ -88,9 +88,23 @@
                         elementTop = currentPosition.top - bodyPosition.top;
                         elementLeft = currentPosition.left - bodyPosition.left;
 
-                        //hacer for que resta de 0.1 en 0.1 hasta llegar a la posición deseada.
-                    alert('Element Player Field is at: x=' + playerFieldLeft + ' y= ' + playerFieldTop + ' and Target element is at: x= ' + elementLeft + ' y= ' + elementTop);
+                        //hacer ciclo que resta de 0.1 en 0.1 hasta llegar a la posición deseada.
+                        //elementLeft < playerFieldLeft || elementTop > playerFieldTop
+                        var iteracion = 0;
+                        while (iteracion != 7) {
 
+                            if (elementLeft < playerFieldLeft) {
+                                elementLeft += 1;
+                                currentPosition.left = elementLeft + "px";
+                            }
+
+                            if (elementTop > playerFieldTop) {
+                                elementTop -= 1;
+                                currentPosition.top = elementTop + "px";
+                            }
+                            console.log(iteracion);
+                            iteracion++;
+                        }
                     break;
                 case 2:
                     break;
