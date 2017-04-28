@@ -35,18 +35,12 @@
 
                 <div class="row centerElement">
                     <div class=" col-sm-12 col-md-6">
-                        <label id="puntuacionJugador"><span class="label">Puntuación del Jugador: 0</span></label>
+                        <label id="puntuacionJugador"><span class="label">Puntuación del Jugador: 0</span></label><div class="clearfix"></div><br />
+                        <img src="../imagenes/reverso.jpg" height="200" width="130" id="playerField"/>
                     </div>
                     <div class=" col-sm-12 col-md-6">
-                        <label id="puntuacionCrupier"><span class="label">Puntuación del Crupier: 0</span></label>
-                    </div>
-                </div>
-                <div class="row centerElement">
-                    <div class="col-md-6">
-                        <img src="../imagenes/reverso.jpg" height="200" width="130" />
-                    </div>
-                    <div class="col-md-6">
-                        <img src="../imagenes/reverso.jpg" height="200" width="130" />
+                        <label id="puntuacionCrupier"><span class="label">Puntuación del Crupier: 0</span></label><div class="clearfix"></div><br />
+                        <img src="../imagenes/reverso.jpg" height="200" width="130" id="crupierField"/>
                     </div>
                 </div>
                 <div class="clearfix"></div><br /><br />
@@ -67,6 +61,7 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
 
     <script type="text/javascript">
+        var count = 1;
 
         document.getElementById("botonApostar").onclick =
             function apostar() {
@@ -84,6 +79,47 @@
             imgCreated.style.top = creationPosition.top + 'px';
             imgCreated.style.left = creationPosition.left + 'px';
             document.getElementById("tablero").appendChild(imgCreated);
+            animacion(imgCreated, 1);
+        }
+
+        function animacion(element, type) {
+
+            switch (type) {
+                case 1:
+                    var targetPosition = document.getElementById("playerField").getBoundingClientRect(),
+                        bodyPosition = document.body.getBoundingClientRect(),
+                        currentPosition = element.getBoundingClientRect(),
+                        playerFieldTop = targetPosition.top - bodyPosition.top,
+                        playerFieldLeft = targetPosition.left - bodyPosition.left,
+                        elementTop = currentPosition.top - bodyPosition.top;
+                        elementLeft = currentPosition.left - bodyPosition.left;
+
+                        //hacer ciclo que resta de 0.1 en 0.1 hasta llegar a la posición deseada.
+                        //elementLeft < playerFieldLeft || elementTop > playerFieldTop
+                        var iteracion = 0;
+                        while (iteracion != 7) {
+
+                            if (elementLeft < playerFieldLeft) {
+                                elementLeft += 1;
+                                currentPosition.left = elementLeft + "px";
+                            }
+
+                            if (elementTop > playerFieldTop) {
+                                elementTop -= 1;
+                                currentPosition.top = elementTop + "px";
+                            }
+                            console.log(iteracion);
+                            iteracion++;
+                        }
+                    break;
+                case 2:
+                    break;
+
+                default:
+                    break;
+
+            }
+
         }
     </script>
 </body >
