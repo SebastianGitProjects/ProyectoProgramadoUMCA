@@ -4,6 +4,7 @@
     <title>JUEGO BLACKJACK</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " type="text/css" />   
     <link href="../estilos/estilos.css" rel="stylesheet" />
+    <link href="../JqueryUI/jquery-ui.min.css" rel="stylesheet" />  
 </head>
 <body background="../imagenes/blackjack.png">
     <nav class="navbar navbar-inverse">
@@ -11,12 +12,14 @@
             <div class="navbar-header">
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/formulario/ReglasBlackJack.html">Reglas</a></li>
-                <li><a href="/EjemploJqueryUI_clase/Formularios/Autor.html"> Autor</a></li>
-                <li><a href="#"></a></li>
+                <li><a href="/formulario/ReglasBlackJack.html">Reglas</a></li>
+                <li><a href="C:/Users/David/Source/ProyectoProgramadoUMCA/EjemploJqueryUI_clase/Formularios/Autor.html"> Autor</a></li>
+                <li><a href="">Ubicación </a></li>
+                <li><a href="C:/Users/David/Source/ProyectoProgramadoUMCA/formulario/jugar.html">Jugar </a></li>
+                
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/formulario/registrarUsuario.html" ><span class="glyphicon glyphicon-user"></span> Registro de Usuario</a></li>
+                <li><a href="/formulario/registrarUsuario.html"><span class="glyphicon glyphicon-user"></span> Registro de Usuario</a></li>
                 <li><a href="/formulario/longIng.html?nombre=1&password="><span class="glyphicon glyphicon-log-in"></span> Iniciar sesion</a></li>
             </ul>
         </div>
@@ -26,6 +29,32 @@
             <font face="" color="black" size=7>CASINO</font>
         </div>
     </div>
+
+    <h2 style="color: red">Vive una gran experiencia</h2>
+    <h2 style="color: white">Sé un auténtico ganador </h2>
+    <h2 style="color: white">Apuesta y gana </h2>
+    <h2 style="color: white">Eres un campeón </h2>
+    <h2 style="color: white">Cambia tu rol </h2>
+    <h2 style="color: white">Diviértete </h2>
+    </div>
+    </div>
+    </div>
+
+    <h1> Video</h1>
+    <video id="vidSele" width="500" height="400" poster="">
+        <source src="../videos/Como jugar Blackjack.mp4" type="video/mp4">
+        El navegador no soporta video.
+    </video>
+    <div>
+        <button id="btVideoCompleto">Pantalla Completa</button>
+        <button id="btReproducirVideo">Reproducir</button>
+        <button id="btPausarVideo" hidden>Pausar</button>
+        <label for="volumenVideo">Volumen</label>
+        <input id="volumenVideo" type="number" min="0" max="100" step="2" value="100" />
+        <label id="lblTiempoVideo">Tiempo:</label>
+    </div>
+    <br />
+    <br />
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol id="olCarousel" class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -52,17 +81,62 @@
             <span class="sr-only">Siguiente</span>
         </a>
     </div>
-    <div>
-        <h3>Como jugar JackBlack</h3>
-        <video class="divvideo" controls>
-            <source src="../videos/Como jugar Blackjack.mp4" type="video/mp4">
-            El navegador no soporta video.
-        </video>
-    </div>
-        <header>
-            <!--<div class="page-header" />-->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script>
-            <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
-        </header>
+    <div class="container" id="divContenedorContenido">
+        <div class=" row" id="divRowContenido1">
+            <div class="col-sm-4">
+
+                <!-- Incluimos Jquery -->
+                <script src="../Scripts/jquery-1.10.2.min.js"></script>
+                <!-- Incluimos Jquery UI-->
+                <script src="../JqueryUI/jquery-ui.min.js"></script>
+
+                <script type="text/javascript">
+                    $(function () {
+                        creaVideo();
+
+                    });
+                    ///Función para la reproducción de video
+                    function creaVideo() {
+                        $("#btVideoCompleto").click(function () {
+                            var elementoVideo = $("#vidSele")[0];
+                            pantallaCompleta(elementoVideo);
+                        });
+
+                        $("#btReproducirVideo").click(function () {
+                            ///obtenemos el  video
+                            var elementoVideo = $("#vidSele")[0];
+                            reproducir(elementoVideo);
+                            $("#btReproducirVideo").hide();
+                            $("#btPausarVideo").show();
+                        });
+                        $("#btPausarVideo").click(function () {
+                            ///obtenemos  video
+                            var elementoVideo = $("#vidSele")[0];
+                            pausar(elementoVideo);
+                            $("#btPausarVideo").hide();
+                            $("#btReproducirVideo").show();
+                        });
+                        $("#volumenVideo").change(function () {
+                            var valorIngresado = this.value;/// volumen video
+                            var elementoVideo = $("#vidSele")[0];
+                            aumentarVolumen(elementoVideo, valorIngresado);
+                        });
+                        $("#vidSele").on("ended", function () {
+                            alert("video finalizado");
+                        });
+                        $("#vidSele").on("timeupdate", function () {
+                            var tiempoActual = this.currentTime.toFixed(0);
+                            $("#lblTiempoVideo").text("Tiempo: " + tiempoActual + " s");
+                        });
+                    }
+
+
+                </script>
+
+                <header>
+                    <!--<div class="page-header" />-->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script>
+                    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+                </header>
 </body>
 </html>

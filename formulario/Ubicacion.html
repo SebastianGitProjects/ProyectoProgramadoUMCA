@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " />
+    <title></title>
+    <!-- Incluimos el css de jqueryui -->
+    <link href="../JqueryUI/jquery-ui.min.css" rel="stylesheet" /> 
+</head>
+<body>
+    <h1>Ubicación de Usuario </h1>
+    <div id="googleMap" style="width:100%;height:400px"></div>
+    <button id="btMostrarGeoloc">Mostrar Ubicación</button>
+    
+ <!--   <object data="../Formularios/UsarObject.html"></object>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script> 
+</body>
+</html>
+<!-- Incluimos Jquery -->
+<script src="../Scripts/jquery-1.10.2.min.js"></script>
+<!-- Incluimos Jquery UI-->
+<script src="../JqueryUI/jquery-ui.min.js"></script>
+<script src="../Scripts/jquery.validate.js"></script>
+<!-- Incluimos Jquery Validate-->
+<script src="../Scripts/additional-methods.js"></script>
+<!-- Incluimos nuestra librería de funciones generales -->
+<script src="../Scripts/funcionesGeneralesJS.js"></script>
+<!-- script para el api de google maps -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqg9VfRnJ2FvMg0yTPT4GA42BEwqiyC40"></script>
+<!-- Incluimos nuestro script específico -->
+<script type="text/javascript">
+    $(function () {
+        creaElementos();
+    });
+    ///Función que crea los elementos
+    function creaElementos() {
+        $("#btMostrarGeoloc").click(function () {
+            muestraGeoLocation();
+        });
+    }
+    ///valida si el navegador soporta geolocation
+    function soportaGeolocation() {
+        if (!navigator.geolocation) {
+            alert("Su navegador no soporta Geolocation");
+            return false;
+        }
+        return true;
+    }
+    function muestraGeoLocation() {
+        if (soportaGeolocation() == true || soportaGeolocation() == 'true') {
+            ///solicitud al navegador de las coordenadas
+            navigator.geolocation.getCurrentPosition(
+                coordenadasObtenidas,///función que se ejecuta si se pudieron obtener las coordenadas
+                errorCoordenadas);///función que se ejecuta si NO se pudieron obtener las coordenadas
+        }
+    }
+    function errorCoordenadas() {
+        alert("No fue posible obtener las coordenadas");
+    }
+    ///position: objeto que contiene la información que
+    ///retorna el API    
+    function coordenadasObtenidas(position) {
+        //latitud
+        var latitud = position.coords.latitude;
+        //longitud
+        var longitud = position.coords.longitude;
+        ///interacción con el API de google definidiendo la posición "x" y "y"
+        var googleLatLong = new google.maps.LatLng(latitud, longitud);
+        ///definir las propiedas del mapa
+        var mapProp = {
+            center: googleLatLong,
+            zoom: 15//valor entre 100, es decir para un 100% se pone un 10
+        };
+        ///crear el mapa
+        var mapa = new google.maps.Map($("#googleMap")[0], mapProp);
+        ///definir las propiedades del punto
+        var propiedadesPunto = {
+            position: googleLatLong,
+            map: mapa,
+            title: "Mi ubicación actual"
+        };
+        ///crear el punto
+        var punto = new google.maps.Marker(propiedadesPunto);
+    }
+
+</script>
