@@ -1,12 +1,12 @@
-﻿ 
+﻿
 
 
-   body {
-   background-image: url(../imagenes/Blackjack_board.jpg);
+body {
+    background-image: url(../imagenes/../imagenes/fondo-verde-217279.jpg);
     background-position: bottom;
     background-repeat: no-repeat;
     padding: 15px;
-    background-size: auto, contain;
+    background-size: 3300px, contain;
 }
 .color {
     color: black;

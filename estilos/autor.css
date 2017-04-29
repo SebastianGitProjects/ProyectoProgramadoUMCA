@@ -1,9 +1,9 @@
-﻿  body{
-    background-image: url(../imagenes/unnamed.png);
+﻿body {
+    background-image: url(../imagenes/fondo-verde-217279.jpg);
     background-position: bottom;
     background-repeat: no-repeat;
     padding: 10px;
-    background-size: 600px, auto;
+    background-size: 3200px, auto;
 }
 img{
     border-radius: 25px;
