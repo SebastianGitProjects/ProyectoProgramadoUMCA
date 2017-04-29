@@ -53,68 +53,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
-
-    <script type="text/javascript">
-        var count = 1;
-
-        document.getElementById("botonApostar").onclick =
-            function apostar() {
-                //Está función es la que lleva la magia jajaja
-                img_create("../imagenes/10_corazon.GIF");
-            }
-
-        function img_create(src) {
-            var creationPosition = document.getElementById("imagenBaraja").getBoundingClientRect();
-            var imgCreated = document.createElement("img");
-            imgCreated.src = src; //La ruta será dinámica cargada desde la DB
-            imgCreated.setAttribute("height", "200");
-            imgCreated.setAttribute("width", "130");
-            imgCreated.setAttribute("class", "cartaSuperpuesta");
-            imgCreated.style.top = creationPosition.top + 'px';
-            imgCreated.style.left = creationPosition.left + 'px';
-            document.getElementById("tablero").appendChild(imgCreated);
-            animacion(imgCreated, 1);
-        }
-
-        function animacion(element, type) {
-
-            switch (type) {
-                case 1:
-                    var targetPosition = document.getElementById("playerField").getBoundingClientRect(),
-                        bodyPosition = document.body.getBoundingClientRect(),
-                        currentPosition = element.getBoundingClientRect(),
-                        playerFieldTop = targetPosition.top - bodyPosition.top,
-                        playerFieldLeft = targetPosition.left - bodyPosition.left,
-                        elementTop = currentPosition.top - bodyPosition.top;
-                        elementLeft = currentPosition.left - bodyPosition.left;
-
-                        //hacer ciclo que resta de 0.1 en 0.1 hasta llegar a la posición deseada.
-                        //elementLeft < playerFieldLeft || elementTop > playerFieldTop
-                        var iteracion = 0;
-                        while (iteracion != 7) {
-
-                            if (elementLeft < playerFieldLeft) {
-                                elementLeft += 1;
-                                currentPosition.left = elementLeft + "px";
-                            }
-
-                            if (elementTop > playerFieldTop) {
-                                elementTop -= 1;
-                                currentPosition.top = elementTop + "px";
-                            }
-                            console.log(iteracion);
-                            iteracion++;
-                        }
-                    break;
-                case 2:
-                    break;
-
-                default:
-                    break;
-
-            }
-
-        }
+    <script src="../EjemploJqueryUI_clase/Scripts/partidas.js" type="text/javascript">
+       
     </script>
 </body >
 </html >
