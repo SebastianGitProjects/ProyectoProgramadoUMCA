@@ -17,10 +17,22 @@ document.getElementById("botonApostar").onclick =
 
         seleccionarCarta(definirId(), 1, 'playerField');
         setTimeout(function () {
-        seleccionarCarta(definirId(), 2, 'crupierField');
-        }, 1000)
+            seleccionarCarta(definirId(), 2, 'crupierField');
+        }, 1000);
+        setTimeout(function() {
+            if (puntuacionUsuario === 21) {
+                alert("¡Has ganado!");
+            } else if (puntuacionUsuario > 21) {
+                alert("Has perdido...");
+            } else if (puntuacionCrupier > 21) {
+                alert("¡Has ganado!");
+            } else if (puntuacionCrupier === 21) {
+                alert("Has perdido...");
+            }
+        }, 2000)
         
-        ;
+        
+        
     }
 
 function img_create(src) {
@@ -111,7 +123,7 @@ function seleccionarCarta(id, type, deleted) {
                 },
                 function () { alert("Error inesperado") });
         })
-
+       
     }
 }
     function insertarValores() {
