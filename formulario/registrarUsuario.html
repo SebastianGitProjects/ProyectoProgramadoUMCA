@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " type="text/css" />
     <link rel="stylesheet" href="../estilos/registrarUsuario.css" type="text/css" />
 </head>
-<body background="../imagenes/fondo-verde-217279.jpg">
+<body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/formulario/BLACKJACKsebas.html#">Menú</a>
+                <a class="navbar-brand" href="/formulario/BLACKJACKsebas.html#">Pagina Principal</a>
             </div>
         </div>
     </nav>
@@ -18,15 +18,13 @@
     <div style="align-content:center">
         <div class="page-header">
             <div class="container">
-                <font face="impact" size=7 color="red">Registro de usuario</font>
+                <font face="impact" size=7 color="black">Registro de usuario</font>
             </div>
         </div>
-        <div id="divForm">
-            <form id="frmRegistroUsuarios" method="post">
-                <font face="arial" size=5 color="black">
-                    <div class="text-center" />
-                    <div class="navbar-text" />
 
+        <div class="container"> 
+        <div class="jumbotron" id="divForm">
+            <form id="frmRegistroUsuarios" method="post">
                     <div class="form-group">
                         <label for="lblCedula">Cedula:</label>
                         <input type="text" class="form-control" id="cedula" name="cedula" placeholder="#-###-###">
@@ -49,275 +47,24 @@
                         <input type="email" class="form-control" id="correo" name="correo" placeholder="xxxxxx@gmail.com">
                     </div>
                     <div class="form-group">
-                        <label for="lblpassword" class="color:black">Contraseña:</label>
+                        <label for="lblpassword">Contraseña:</label>
                         <input type="password" class="form-control" id="password" name="password">
                     </div>
-                </font>
                 <button type="submit" class="btn btn-danger">Registrarse</button>
                 <button type="reset" class="btn btn-danger">Limpiar</button>
 
             </form>
         </div>
+        </div>
     </div>
     <br />
     <br />
 
-    <div class="col-lg-10">
-        <font face="arial" size=5 color="white">
-            <h2>Lista de Registros Usuarios</h2>
-        </font>
-        <font face="arial" size="3" color="white">
-            <table id="tblRegistros" class="table table-bordered">
-                <thead>
-                    <tr>
-                        <!--css3-->
-                        <th>Cédula</th>
-                        <th>Nombre</th>
-                        <th>Primer Apellido</th>
-                        <th>Segundo Apellido</th>
-                        <th>Correo</th>
-                    </tr>
-                </thead>
-
-            </table>
-        </font>
-    </div>
-
-    <script src="../scripts/jquery-1.10.2.min.js"></script>
-    <script src="../scripts/bootstrap.js"></script>
-    <script src="../scripts/jquery.validate.js"></script>
-    <script src="../scripts/additional-methods.js"></script>
-    <script src="../scripts/funcionesGeneralesJS.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            creaReglasvalidacion();
-            establecerReglasValidacion();
-
-            cargaObjetosAlmacenados();
-        });
-        /////// se encarga de crear las validacion del form
-        function creaReglasvalidacion() {
-
-            $("#frmRegistroUsuarios").validate({
-                rules: {
-                    cedula: {
-                        required: true,
-                        pattern: /^[1-9]-\d{3}-\d{3}$/
-                    },
-                    nombre: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 15,
-                    },
-                    PrimerApellido: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 26,
-                    },
-                    SegundoApellido: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 26,
-                    },
-                    correo: {
-                        required: true,
-
-
-                    },
-                    password: {
-                        required: true,
-                        minlength: 8,
-                        maxlength: 16
-                    }
-
-                },
-                messages: {
-                    cedula: {
-                        pattern: "Formato esperado: #-###-###"
-                    },
-                    nombre: {
-                        required: "El nombre es requerido",
-                        minlength: "Debe ingresar minimo 6 caracteres",
-                        maxlength: "Debe ingresar maximo 15 caracteres"
-                    },
-                    PrimerApellido: {
-                        required: "El apellido es requerido",
-                        minlength: "Debe ingresar minimo 6 caracteres",
-                        maxlength: "Debe ingresar maximo 26 caracteres"
-
-                    },
-                    SegundoApellido: {
-                        required: "El apellido es requerido",
-                        minlength: "Debe ingresar minimo 6 caracteres",
-                        maxlength: "Debe ingresar maximo 26 caracteres"
-
-                    },
-                    correo: {
-                        required: "Correo es requerido"
-                    },
-
-                    password: {
-                        required: "Password es requerido",
-                        minlength: "Debe ingresar minimo 8 caracteres",
-                        maxlength: "Debe ingresar maximo 16 caracteres"
-
-                    }
-
-                },
-
-                ///función que se ejecuta al validar el formulario
-                submitHandler: function (form) {
-                    alert("Usuario Registrado ");
-                    ///si el formulario fue validado, entonces almacenarlo
-                    ///obtenemos la cédula que queremos almacenar con la finalidad de validar
-                    ///si existe para prevenir duplicidades
-                    var cedula = $("#cedula").val();
-                    if (buscaCedulaInsertada(cedula)) {
-                        alert("El número de cédula fue ingresado previamente");
-                    }
-                    else {
-                        almacenaObjeto();
-                    }
-                }
-
-            });
-        }
-        function retornaObjetoLista() {
-            var resultado;
-            ///validar si el navegagador Soporta HTML5 Storage
-            if (validaCapacidadHTMLStorage()) {
-                ////se obtiene el objeto
-                var objetoListaPersonaRecuperada = sessionStorage.getItem("listaPersonas");
-                ///si el objeto obtenido no es nulo, entonces lo procesamos
-                if (objetoListaPersonaRecuperada != null
-                    && objetoListaPersonaRecuperada != "null") {
-                    ///el objeto se guarda en formato JSON, por lo que es necesario "reconstruirlo"
-                    resultado = JSON.parse(objetoListaPersonaRecuperada);
-                }
-                else {
-                    ///si el objeto no existe lo procedemos a crear
-                    ///lo creamos de esta forma: JSON.stringify([]) para indicar que es un array "vacío"
-                    var objetoConvertidoJSON = JSON.stringify([]);
-                    ///lo guardamos
-                    sessionStorage.setItem(
-                        "listaPersonas",///nombre donde lo deseo guardar(llave)
-                        objetoConvertidoJSON///objeto que deseo guardar
-                    );
-                    ///lo retornamos
-                    resultado = JSON.parse(objetoConvertidoJSON);
-                }
-            }
-            return resultado;
-        }
-
-        ///función que se encarga de buscar los objetos que se encuentren almacenados.
-        function cargaObjetosAlmacenados() {
-            ///obtenemos la lista los objetos
-            var listaObjetos = this.retornaObjetoLista();
-            ///recorremos la lista
-            $.each(listaObjetos, function () {
-                ///obtenemos cada objeto haciewndo uso de "this"
-                var objetoObtenido = this;
-                ///llamamos a la función que nos permitirá agregar una fila
-                //evnaindo como parámetro cada uno de los objetos que contienen la lista
-                agregaFilaTabla(objetoObtenido);
-            });
-        }
-        ///función que nos permita buscar en la lista
-        //de objetos tomando como filtro una propiedad
-        ///en este caso cedula
-        function buscaCedulaInsertada(pCedula) {
-            var resultado = false;
-            ///obtenemos la lista de los objetos
-            var listaObjetos = this.retornaObjetoLista();
-            ///haciendo uso de la función "grep" de jquery
-            ///devolvemos todos los objetos cuya propiedad
-            //cedula sea igual a la cedula que enviamos por parámetro
-            var busqueda = $.grep(listaObjetos, function (e) {
-                return e.cedula == pCedula;
-            });
-            ///si la busqueda devolvió una cédula o más
-            ///quiere decir que ya había sido ingresada
-            resultado = busqueda.length > 0;
-            return resultado;
-        }
-
-        ///función que permite almacenar un objeto en el dispositivo del usuario
-        function almacenaObjeto() {
-            ///validar si el navegagador Soporta HTML5 Storage
-            if (validaCapacidadHTMLStorage()) {
-                var listaObjetos = this.retornaObjetoLista();
-                ///Creamos el objeto con sus propiedades
-                var objetoGuardar = {
-                    ///con la función .val() accedemos al valor de la etiqueta HTML
-                    ///por ejemplo $("#primerApellido").val() es lo mismo
-                    /// que decir "el contenido del control cuyo id es primerApellido"
-                    cedula: $("#cedula").val(),
-                    nombre: $("#nombre").val(),
-                    primerApellido: $("#primerApellido").val(),
-                    segundoApellido: $("#segundoApellido").val(),
-                    correo: $("#correo").val(),
-
-
-                }
-                listaObjetos.push(objetoGuardar);
-                ///Para poder almacenar el objeto es necesario convertirlo a JSON
-                var objetoConvertidoJSON = JSON.stringify(listaObjetos);
-                ///Una vez convertido el objeto lo guardamos
-                sessionStorage.setItem(
-                    "listaPersonas",///nombre donde lo deseo guardar(llave)
-                    objetoConvertidoJSON///objeto que deseo guardar
-                );
-                ///limpiamos el formulario
-                $('#frmRegistroUsuarios').trigger("reset");
-                ///agregamos el objeto almacenado a la tabla
-                agregaFilaTabla(objetoGuardar);
-                ///limpiamos el formulario
-                $('#frmRegistroUsuarios').trigger("reset");
-            }
-        }
-
-        ///agrega una fila a la tabla haciendo uso de un objeto
-        function agregaFilaTabla(objeto) {
-            ///creamos las fila de la tabla en html con sus valores
-            ///Es necesario recordar que deben ser los mismos que se declararon como etiquetas de tipo tg
-            var nuevaFilaTabla = '<tr>';
-            ///ahora vamos creando las columnas(td)
-            nuevaFilaTabla += "<td>";
-            nuevaFilaTabla += objeto.cedula;
-            ///cada columna (td) debe ser cerrada
-            nuevaFilaTabla += "</td>";
-            nuevaFilaTabla += "<td>";
-            nuevaFilaTabla += objeto.primerApellido;
-            nuevaFilaTabla += "</td>";
-            nuevaFilaTabla += "<td>";
-            nuevaFilaTabla += objeto.segundoApellido;
-            nuevaFilaTabla += "</td>";
-            nuevaFilaTabla += "<td>";
-            nuevaFilaTabla += objeto.nombre;
-            nuevaFilaTabla += "</td>";
-            nuevaFilaTabla += "<td>";
-            nuevaFilaTabla += objeto.correo;
-            nuevaFilaTabla += "</td>";
-            ///cerramos la etiqueta tr
-            nuevaFilaTabla += '</tr>';
-            ///creamos el selector que nos permita ubicarnos en la etiqueta tbody de la tabla
-            /// y procedemos a agregrarle la nueva fila
-            $("#tblRegistros tbody").append(nuevaFilaTabla);
-        }
-
-        ///valida que un navegador soporte HTML Storage
-        function validaCapacidadHTMLStorage() {
-            if (typeof (Storage) == "undefined") {
-                alert("Su navegador no soporta HTML Storage");
-                return false;
-            }
-            return true;
-        }
-
-
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script> 
+    <script src="../EjemploJqueryUI_clase/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="../EjemploJqueryUI_clase/Scripts/bootstrap.js"></script>
+    <script src="../EjemploJqueryUI_clase/Scripts/jquery.validate.js"></script>
+    <script src="../EjemploJqueryUI_clase/Scripts/additional-methods.js"></script>
+    <script src="../EjemploJqueryUI_clase/Scripts/funcionesGeneralesJS.js"></script>
+    <script src="../EjemploJqueryUI_clase/Scripts/registroUsuarios.js" type="text/javascript"></script>
 </body>
 </html>

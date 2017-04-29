@@ -1,18 +1,13 @@
 ﻿
-#divForm {
-    margin: 0 auto;
-}
 .form-control {
     border-radius: 8px;
     border-color: #F05F40;
     border-width: 3px;
     margin: 0 auto;
     width: 78%;
+    text-align: center;
 }
 body {
-    background: url("../imagenes/fondo-verde-217279.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
     padding-top: 30px;
 }
 th , h2{
@@ -24,9 +19,11 @@ form {
     width: 20%;
     margin: 0 auto;
 }
-centrar {
-    
 
+.jumbotron {
+    background-color: black;
+    color: white;
+    text-align: center;
 }
 
 
