@@ -92,6 +92,7 @@
                     })
                         
                     }
+                    location.reload();
                 }
 
             });
