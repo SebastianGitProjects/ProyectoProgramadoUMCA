@@ -16,21 +16,3 @@
         extension: $.validator.format("Favor seleccione un formato válido {0}"),
         require_from_group: $.validator.format("Ingrese al menos uno de estos valores")
     });
-
-    ///Cambia los datos del jqeuryui datepicker a español
-    $.datepicker.setDefaults(
-        {
-            dateFormat: "dd/mm/yy",
-            timeFormat: "HH:mm",
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié;', 'Juv', 'Vie', 'Sáb'],
-            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-            weekHeader: 'Sm',
-            currentText: 'Hoy',
-            firstDay: 1,
-            yearSuffix: '',
-            fechaCR: true
-        });

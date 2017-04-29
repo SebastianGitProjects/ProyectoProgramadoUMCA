@@ -4,6 +4,17 @@
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " type="text/css" />
     <link rel="stylesheet" href="../estilos/registrarUsuario.css" type="text/css" />
+    <!-- Common Kendo UI CSS for web widgets and widgets for data visualization. -->
+    <link href="../estilos/kendo.common.min.css" rel="stylesheet" />
+
+    <!-- (Optional) RTL CSS for Kendo UI widgets for the web. Include only in right-to-left applications. -->
+    <link href="../estilos/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Default Kendo UI theme CSS for web widgets and widgets for data visualization. -->
+    <link href="../estilos/kendo.default.min.css" rel="stylesheet" />
+
+    <!-- (Optional) Kendo UI Hybrid CSS. Include only if you will use the mobile devices features. -->
+    <link href="../estilos/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <nav class="navbar navbar-inverse">
@@ -60,11 +71,110 @@
     <br />
     <br />
 
+
     <script src="../EjemploJqueryUI_clase/Scripts/jquery-1.10.2.min.js"></script>
     <script src="../EjemploJqueryUI_clase/Scripts/bootstrap.js"></script>
     <script src="../EjemploJqueryUI_clase/Scripts/jquery.validate.js"></script>
     <script src="../EjemploJqueryUI_clase/Scripts/additional-methods.js"></script>
     <script src="../EjemploJqueryUI_clase/Scripts/funcionesGeneralesJS.js"></script>
     <script src="../EjemploJqueryUI_clase/Scripts/registroUsuarios.js" type="text/javascript"></script>
+    <!-- Kendo UI combined JavaScript -->
+    <script src="../EjemploJqueryUI_clase/Scripts/kendo.all.min.js"></script>
+
+    <div id="example">
+        <div id="grid"></div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var db = openDatabase("BlackJackLocalDB", "1.0", "BlackJackLocalDB", 3 * 1024);
+                function toArray(result) {
+                    var length = result.rows.length;
+
+                    var data = new Array(length);
+
+                    for (var i = 0; i < length; i++) {
+                        data[i] = $.extend({}, result.rows.item(i));
+                    }
+
+                    return data;
+                }
+                function read(db, callback) {
+                    db.transaction(function (tx) {
+                        tx.executeSql('SELECT cedula, nombre, pApe, sApe, contra, email from tblUsuarios', [], function (tx, result) {
+                            callback(toArray(result));
+                        });
+                    });
+                }
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: function (options) {
+
+                            db.transaction(function (tx) {
+
+                                tx.executeSql('SELECT cedula, nombre, pApe, sApe, contra, email from tblUsuarios', [], function (tx, result) {
+
+                                    var data = [];
+                                    // copy the rows to a regular array
+                                    for (var i = 0; i < result.rows.length; i++) {
+                                        data[i] = result.rows.item(i);
+                                    }
+
+                                    options.success(data); // return the data back to the data source
+                                });
+                            });
+                        }
+                    },
+
+                    schema: {
+                        model: {
+                            id: "cedula",
+                            fields: {
+                                cedula: { editable: false },
+                                nombre: { type: "text", validation: { required: true } },
+                                pApe: { type: "text", validation: { required: true } },
+                                sApe: { type: "text", validation: { required: true } },
+                                contra: { type: "text", validation: { required: true } },
+                                email: { type: "text", validation: { required: true } }
+                            }
+                        }
+                    }
+                });
+
+
+                $("#grid").kendoGrid({
+                    dataSource: dataSource,
+                    columns: [
+                        { field: "cedula" },
+                        { field: "nombre" },
+                        { field: "pApe" },
+                        { field: "sApe" },
+                        { field: "contra" },
+                        { field: "email" }
+                    ]
+                });
+            });
+        </script>
+    </div>
+
+    <style type="text/css">
+        .customer-photo {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-size: 32px 35px;
+            background-position: center center;
+            vertical-align: middle;
+            line-height: 32px;
+            box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+            margin-left: 5px;
+        }
+
+        .customer-name {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 32px;
+            padding-left: 3px;
+        }
+    </style>
 </body>
 </html>
