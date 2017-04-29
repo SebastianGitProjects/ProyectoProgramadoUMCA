@@ -4,6 +4,9 @@
     <title>BlackJack - Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BlackJack - Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
@@ -12,7 +15,7 @@
     <link rel="stylesheet" href="../estilos/longing.css">
 </head>
 <body>
-    
+
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -73,7 +76,8 @@
             </div>
         </div>
     </section>
-     <script type="text/javascript">
+
+    <script type="text/javascript">
         $(function () {
             creaReglasvalidacion();
         });
@@ -102,30 +106,30 @@
                         required: "El password es requerido",
                         minlength: "Debe ingresar minimo 8 caracteres",
                         maxlength: "Debe ingresar maximo 16 caracteres",
-                        
+
                     }
 
                 },
                 submitHandler: function (form) {
-                    if(!window.openDatabase){
+                    if (!window.openDatabase) {
                         alert("Tu navegador no tiene soporte para Web Sql, por favor utiliza otro para realizar el registro de usuario");
-                    }else{
-                        var db = openDatabase("BlackJackLocalDB","1.0","BlackJackLocalDB", 3*1024);
-                        db.transaction(function(tx){
-                            tx.executeSql("CREATE TABLE IF NOT EXISTS tblUsuarios(id INTEGER PRIMARY KEY AUTOINCREMENT, cedula TEXT, nombre TEXT, pApe TEXT, sApe TEXT, contra TEXT, email TEXT)");
-                            tx.executeSql("INSERT INTO tblUsuarios(cedula, nombre, pApe, sApe, contra, email) VALUES(?, ?, ?, ?, ?, ?)", [ced, nom, pApel, sApel, pass, corr], 
-                                function(){alert("Usuario Registrado ");}, 
-                                function(){alert("No se ha podido completar el registro")});  
-                    })
-                        
+                    } else {
+                        var db = openDatabase("BlackJackLocalDB", "1.0", "BlackJackLocalDB", 3 * 1024);
+                        db.transaction(function (tx) {
+                            tx.executeSql("INSERT INTO tblUsuarios(cedula, nombre, pApe, sApe, contra, email) VALUES(?, ?, ?, ?, ?, ?)", [ced, nom, pApel, sApel, pass, corr],
+                                function () { alert("Usuario Registrado "); },
+                                function () { alert("No se ha podido completar el registro") });
+                        })
+
                     }
                 }
             });
-        
+
         }
-          
-        </script>
+
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
+
 </html>
