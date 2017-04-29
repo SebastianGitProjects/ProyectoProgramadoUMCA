@@ -15,8 +15,19 @@
     </nav>
     <br />
 
-
-    <div class="jumbotron centerElement">
+    <div class ="container" id="formulario">
+        <div class="jumbotron" style="margin: 0px auto; text-align:center;">
+            <form id="frmApuesta">
+                <label class="form-item main-label">Defina su apuesta</label>
+                <br />
+                <input type="text" name="apuesta" id="apuesta" placeholder="$ Apuesta" style="border-radius:8px; text-align:center">
+                <div class="clearfix"></div><br />
+                <button type="submit" name="nueva" id="nueva" class=" btn">Nueva Partida</button>
+                <button type="button" name="car" id="cargar" onclick="CargarValores()" class=" btn"> Cargar Partida</button>
+            </form>
+        </div>
+    </div>
+    <div class="jumbotron centerElement" style="display:none" id="Juego">
         <div id="mainContent">
             <div id="tablero">
 
@@ -46,11 +57,14 @@
                 <div class="clearfix"></div><br /><br />
 
                 <div class="row centerElement">
-                    <div class=" col-sm-12 col-md-6">
+                    <div class=" col-sm-12 col-md-4">
                         <button class="btn" onclick="apostar()" id="botonApostar">Apostar</button>
                     </div>
-                    <div class=" col-sm-12 col-md-6">
-                        <button class="btn">Retirarse</button>
+                    <div class=" col-sm-12 col-md-4">
+                        <button class="btn" id="retirarse" onclick="retirarse()">Retirarse</button>
+                    </div>
+                    <div class=" col-sm-12 col-md-4">
+                        <button class="btn" id="guardar" onclick="guardar()">Guardar y salir</button>
                     </div>
                 </div>
             </div>
@@ -58,6 +72,7 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script>
+    <script src="../EjemploJqueryUI_clase/Scripts/jquery.validate.js" type="text/javascript"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
     <script src="../EjemploJqueryUI_clase/Scripts/partidas.js" type="text/javascript">
        

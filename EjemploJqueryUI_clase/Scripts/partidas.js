@@ -1,11 +1,14 @@
 var count = 1;
-var apuesta = 0;
-var cartasDisponibles = 54;
+var apuestaRealizada = 0;
+var cartasDisponibles = 52;
 var puntuacionUsuario=0; 
 var puntuacionCrupier=0;
-var cartasBarajas = new Array(52);
-var cartasJugador = new Array(14);
-var cartasCrupier = new Array(14);
+var cartasJugador = new Array();
+var cartasCrupier = new Array();
+
+$(function () {
+    creaReglasvalidacion();
+});
 
 window.onload = function () {
     insertarValores();
@@ -21,15 +24,34 @@ document.getElementById("botonApostar").onclick =
         }, 1000);
         setTimeout(function() {
             if (puntuacionUsuario === 21) {
-                alert("¡Has ganado!");
+                if (cartasJugador.length < 3) {
+                    alert("Dos cartas");
+                    apuestaRealizada = apuestaRealizada * 2.5;
+                } else {
+                    alert("más cartas");
+                    apuestaRealizada = apuestaRealizada * 2;
+                }
+                alert("¡Has ganado: $" + apuestaRealizada + "!");
+                borrarPartidaGuardada();
+                location.reload();
             } else if (puntuacionUsuario > 21) {
                 alert("Has perdido...");
+                borrarPartidaGuardada();
+                location.reload();
             } else if (puntuacionCrupier > 21) {
-                alert("¡Has ganado!");
+                apuestaRealizada = apuestaRealizada * 2;
+                alert("¡Has ganado: $" + apuestaRealizada + "!");
+                borrarPartidaGuardada();
+                location.reload();
             } else if (puntuacionCrupier === 21) {
                 alert("Has perdido...");
+                borrarPartidaGuardada();
+                location.reload();
             }
         }, 2000)
+
+        cartasDisponibles = cartasDisponibles-2;
+        document.getElementById("cartasDisponibles").innerHTML = "Cartas Disponibles: " + cartasDisponibles;
         
         
         
@@ -38,7 +60,7 @@ document.getElementById("botonApostar").onclick =
 function img_create(src) {
     var creationPosition = document.getElementById("imagenBaraja").getBoundingClientRect();
     var imgCreated = document.createElement("img");
-    imgCreated.src = src; //La ruta será dinámica cargada desde la DB
+    imgCreated.src = src;
     imgCreated.setAttribute("height", "200");
     imgCreated.setAttribute("width", "130");
     imgCreated.setAttribute("class", "cartaSuperpuesta");
@@ -302,4 +324,159 @@ function seleccionarCarta(id, type, deleted) {
             })
 
         }
+}
+
+    /////// se encarga de crear las validacion del form
+    function creaReglasvalidacion() {
+        $("#frmApuesta").validate({
+            rules: {
+                apuesta: {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                apuesta: {
+                    required:"No puede continuar si no ingresa una apuesta",
+                    number: "Por favor ingrese solo numeros",
+                     },
+            },
+            submitHandler: function (form) {
+                var hide = document.getElementById("formulario");
+                var show = document.getElementById("Juego");
+                hide.style.display= 'none';
+                show.style.display = 'inline-block';
+                var cantidadAApostar = parseInt(document.getElementById("apuesta").value);
+                apuestaRealizada = cantidadAApostar;
+                setTimeout(function () {
+                    seleccionarCarta(definirId(), 1, 'playerField');
+                    setTimeout(function () {
+                        seleccionarCarta(definirId(), 2, 'crupierField');
+                    }, 1000);
+                }, 400);
+                cartasDisponibles = cartasDisponibles - 2;
+                document.getElementById("cartasDisponibles").innerHTML = "Cartas Disponibles: " + cartasDisponibles;
+            }
+        })
     }
+
+document.getElementById("retirarse").onclick = function retirarse() {
+
+    borrarPartidaGuardada();
+    if (puntuacionUsuario > puntuacionCrupier) {
+            apuestaRealizada = apuestaRealizada * 2;
+            alert("¡Has ganado: $" + apuestaRealizada + "!");
+    } else if (puntuacionCrupier > puntuacionUsuario) {
+        alert("Has perdido...");
+    } else {
+        alert("¡Empate! Recuperas la apuesta: $" + apuestaRealizada);
+    }
+    location.reload();
+    }
+document.getElementById("guardar").onclick = function guardar() {
+    GuardarValores();
+}
+function GuardarValores() {
+    var srcJugador = document.getElementById("playerField").getAttribute("src");
+    var srcCrupier = document.getElementById("crupierField").getAttribute("src");
+    if (localStorage) {
+        localStorage.clear();
+        for (i = 0; i < cartasJugador.length; i++) {
+            if (cartasJugador[i] !== null);
+            localStorage.setItem('\'' + i + 'J\'', '\'' + cartasJugador[i] + '\'');
+            if (cartasCrupier[i] !== null);
+            localStorage.setItem('\'' + i + 'C\'', '\'' + cartasCrupier[i] + '\'');
+
+        };
+    } else {
+        alert("Local Storage no soportado");
+    }
+    if (!window.openDatabase) {
+        alert("Tu navegador no tiene soporte para Web Sql, por favor utiliza otro para realizar el registro de usuario");
+    } else {
+
+        var db = openDatabase("BlackJackLocalDB", "1.0", "BlackJackLocalDB", 3 * 1024);
+        db.transaction(function (tx) {
+            tx.executeSql("CREATE TABLE IF NOT EXISTS tblPartidas(id INTEGER PRIMARY KEY AUTOINCREMENT, srcJugador TEXT, srcCrupier TEXT, apuesta INTEGER, puntuacionJugador INTEGER, PuntuacionCrupier INTEGER, cartasDisponibles INTEGER)", [],
+                function () {},
+                function () { alert("Imposible crear la tabla"); });
+
+            try {
+                tx.executeSql("DELETE FROM tblPartidas");
+            } catch (err) {
+
+            }
+
+            tx.executeSql("INSERT INTO tblPartidas(srcJugador, srcCrupier, apuesta, puntuacionJugador, PuntuacionCrupier, cartasDisponibles) VALUES(?, ?, ?, ?, ?, ?)", [srcJugador, srcCrupier, apuestaRealizada, puntuacionUsuario, puntuacionCrupier, cartasDisponibles],
+                function () { alert("Partida Guardada"); location.reload(); },
+                function () { alert("Ocurrió un error al guardar la información, inténtelo de nuevo");});
+        })
+
+    }
+}
+
+document.getElementById("cargar").onclick = function CargarValores() {
+    if (!window.openDatabase) {
+        alert("Tu navegador no tiene soporte para Web Sql, por favor utiliza otro para realizar el registro de usuario");
+    } else {
+        var db = openDatabase("BlackJackLocalDB", "1.0", "BlackJackLocalDB", 3 * 1024);
+        db.transaction(function (tx) {
+            tx.executeSql("SELECT * FROM tblPartidas", [], function(tx, salida) {
+                try {
+                    var row = salida.rows.item(0);
+                    apuestaRealizada = row['apuesta'];
+                    cartasDisponibles = row['cartasDisponibles'];
+                    puntuacionUsuario = row['puntuacionJugador'];
+                    puntuacionCrupier = row['PuntuacionCrupier'];
+                    srcPlayer = row['srcJugador'];
+                    srcCru = row['srcCrupier'];
+                    var hide = document.getElementById("formulario");
+                    var show = document.getElementById("Juego");
+                    hide.style.display = 'none';
+                    show.style.display = 'inline-block';
+                    document.getElementById("cartasDisponibles").innerHTML = "Cartas disponibles: " + cartasDisponibles;
+                    document.getElementById("puntuacionJugador").innerHTML = "Puntuacion Jugador: " + puntuacionUsuario;
+                    document.getElementById("puntuacionCrupier").innerHTML = "Puntuacion Crupier: " + puntuacionCrupier;
+                    document.getElementById("playerField").setAttribute("src", srcPlayer);
+                    document.getElementById("crupierField").setAttribute("src", srcCru);
+
+                    if (localStorage) {
+                        for (i = 0; i < localStorage.length/2; i++) {
+                            cartasJugador[i] = localStorage.getItem('\'' + i + 'J\'');
+                            cartasCrupier[i] = localStorage.getItem('\'' + i + 'C\'');
+
+                        };
+                    } else {
+                        alert("Local Storage no soportado");
+                    }
+                } catch (err) {
+                    alert("No existen partidas guardadas: ");
+                }
+            }, function () {
+                alert("Fallo en la carga de datos");
+            });
+        })
+    }
+      
+}
+
+function borrarPartidaGuardada() {
+    if (!window.openDatabase) {
+        alert("Tu navegador no tiene soporte para Web Sql, por favor utiliza otro para realizar el registro de usuario");
+    } else {
+        var db = openDatabase("BlackJackLocalDB", "1.0", "BlackJackLocalDB", 3 * 1024);
+        db.transaction(function (tx) {
+            try {
+                tx.executeSql("DELETE FROM tblPartidas");
+            } catch (err) {
+
+            }
+        })
+    }
+
+    if (localStorage) {
+        localStorage.clear();
+    } else {
+        alert("Local Storage no soportado");
+    }
+}
