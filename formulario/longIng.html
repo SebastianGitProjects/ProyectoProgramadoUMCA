@@ -107,7 +107,18 @@
 
                 },
                 submitHandler: function (form) {
-                    alert("Bienvenido..!! ")
+                    if(!window.openDatabase){
+                        alert("Tu navegador no tiene soporte para Web Sql, por favor utiliza otro para realizar el registro de usuario");
+                    }else{
+                        var db = openDatabase("BlackJackLocalDB","1.0","BlackJackLocalDB", 3*1024);
+                        db.transaction(function(tx){
+                            tx.executeSql("CREATE TABLE IF NOT EXISTS tblUsuarios(id INTEGER PRIMARY KEY AUTOINCREMENT, cedula TEXT, nombre TEXT, pApe TEXT, sApe TEXT, contra TEXT, email TEXT)");
+                            tx.executeSql("INSERT INTO tblUsuarios(cedula, nombre, pApe, sApe, contra, email) VALUES(?, ?, ?, ?, ?, ?)", [ced, nom, pApel, sApel, pass, corr], 
+                                function(){alert("Usuario Registrado ");}, 
+                                function(){alert("No se ha podido completar el registro")});  
+                    })
+                        
+                    }
                 }
             });
         
