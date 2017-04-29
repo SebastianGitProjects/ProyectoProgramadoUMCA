@@ -10,4 +10,10 @@ img{
     border-color : black;
     
 }
+.carousel-inner .item img {
+    width: auto;
+    margin: auto;
+    height: auto;
+    max-height: 300px;
+}
 
