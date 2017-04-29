@@ -1,4 +1,10 @@
-﻿
+﻿body {
+    background-image: url(../imagenes/fondo-verde-217279.jpg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    padding: 15px;
+    background-size: 2800px, 2000px;
+}
 .form-control {
     border-radius: 8px;
     border-color: #F05F40;
